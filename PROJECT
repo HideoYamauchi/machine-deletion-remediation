@@ -25,4 +25,4 @@ resources:
   kind: MachineDeletionRemediationTemplate
   path: github.com/medik8s/machine-deletion-remediation/api/v1alpha1
   version: v1alpha1
-version: "4"
+version: "3"
