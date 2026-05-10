@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package controllers
+package controller
 
 import (
 	"context"
@@ -109,11 +109,11 @@ var _ = BeforeSuite(func() {
 	By("bootstrapping test environment")
 	testEnv = &envtest.Environment{
 		CRDDirectoryPaths: []string{
-			filepath.Join("..", "config", "crd", "bases"),
-			filepath.Join("..", "vendor", "github.com", "openshift", "api", "machine", "v1beta1", "zz_generated.crd-manifests", "0000_10_machine-api_01_machinehealthchecks.crd.yaml"),
-			filepath.Join("..", "vendor", "github.com", "openshift", "api", "machine", "v1beta1", "zz_generated.crd-manifests", "0000_10_machine-api_01_machines-Default.crd.yaml"),
-			filepath.Join("..", "vendor", "github.com", "openshift", "api", "machine", "v1beta1", "zz_generated.crd-manifests", "0000_10_machine-api_01_machinesets-Default.crd.yaml"),
-			filepath.Join("..", "vendor", "github.com", "openshift", "api", "machine", "v1", "zz_generated.crd-manifests", "0000_10_control-plane-machine-set_01_controlplanemachinesets-Default.crd.yaml"),
+			filepath.Join("..", "..", "config", "crd", "bases"),
+			filepath.Join("..", "..", "vendor", "github.com", "openshift", "api", "machine", "v1beta1", "zz_generated.crd-manifests", "0000_10_machine-api_01_machinehealthchecks.crd.yaml"),
+			filepath.Join("..", "..", "vendor", "github.com", "openshift", "api", "machine", "v1beta1", "zz_generated.crd-manifests", "0000_10_machine-api_01_machines-Default.crd.yaml"),
+			filepath.Join("..", "..", "vendor", "github.com", "openshift", "api", "machine", "v1beta1", "zz_generated.crd-manifests", "0000_10_machine-api_01_machinesets-Default.crd.yaml"),
+			filepath.Join("..", "..", "vendor", "github.com", "openshift", "api", "machine", "v1", "zz_generated.crd-manifests", "0000_10_control-plane-machine-set_01_controlplanemachinesets-Default.crd.yaml"),
 		},
 		ErrorIfCRDPathMissing: true,
 	}

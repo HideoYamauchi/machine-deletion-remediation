@@ -140,7 +140,7 @@ generate: controller-gen ## Generate code
 
 .PHONY: fmt
 fmt: goimports ## Run go goimports against code - goimports = go fmt + fixing imports.
-	$(GOIMPORTS) -w  ./main.go ./api ./controllers ./e2e
+	$(GOIMPORTS) -w  ./cmd ./api ./internal ./e2e
 
 .PHONY: vet
 vet: ## Run go vet against code
@@ -179,7 +179,7 @@ test: test-no-verify-changes verify-no-changes ## Run tests and verify no change
 .PHONY: test-no-verify-changes
 test-no-verify-changes: go-verify manifests generate fmt vet test-imports envtest ## Generate and format code, run tests, generate manifests and bundle
 	KUBEBUILDER_ASSETS="$(shell $(ENVTEST) use $(ENVTEST_K8S_VERSION) -p path --bin-dir $(PROJECT_DIR)/testbin)" \
-	go test ./controllers/... -coverprofile cover.out ${TEST_OPS}
+	go test ./internal/controller/... -coverprofile cover.out ${TEST_OPS}
 
 .PHONY: test-e2e
 test-e2e: ## Run end to end tests

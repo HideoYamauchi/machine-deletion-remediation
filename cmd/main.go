@@ -41,7 +41,7 @@ import (
 	machinev1beta1 "github.com/openshift/api/machine/v1beta1"
 
 	appv1alpha1 "github.com/medik8s/machine-deletion-remediation/api/v1alpha1"
-	"github.com/medik8s/machine-deletion-remediation/controllers"
+	"github.com/medik8s/machine-deletion-remediation/internal/controller"
 	"github.com/medik8s/machine-deletion-remediation/version"
 	//+kubebuilder:scaffold:imports
 )
@@ -104,9 +104,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controllers.MachineDeletionRemediationReconciler{
+	if err = (&controller.MachineDeletionRemediationReconciler{
 		Client:   mgr.GetClient(),
-		Log:      ctrl.Log.WithName("controllers").WithName("MachineDeletionRemediation"),
+		Log:      ctrl.Log.WithName("controller").WithName("MachineDeletionRemediation"),
 		Scheme:   mgr.GetScheme(),
 		Recorder: mgr.GetEventRecorderFor("MachineDeletionRemediation"),
 	}).SetupWithManager(mgr); err != nil {
