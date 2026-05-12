@@ -6,34 +6,34 @@ OPERATOR_NAME := machine-deletion-remediation
 ## Tool versions
 # OPERATOR_SDK versions at https://github.com/operator-framework/operator-sdk/releases
 # heads up: 1.37 is the last version which supports go/v3!
-OPERATOR_SDK_VERSION ?= v1.37.0
+OPERATOR_SDK_VERSION ?= v1.42.2
 
 # OPM versions at https://github.com/operator-framework/operator-registry/releases
-OPM_VERSION = v1.61.0
+OPM_VERSION = v1.66.0
 
 # CONTROLLER_GEN versions at https://github.com/kubernetes-sigs/controller-tools/releases
-CONTROLLER_GEN_VERSION = v0.20.0
+CONTROLLER_GEN_VERSION = v0.20.1
 
 # KUSTOMIZE versions at https://github.com/kubernetes-sigs/kustomize/releases
 # note: update KUSTOMIZE_VERSION and KUSTOMIZE_API_VERSION accordingly.
 KUSTOMIZE_API_VERSION = v5
-KUSTOMIZE_VERSION = v5.8.0
+KUSTOMIZE_VERSION = v5.8.1
 
 # https://pkg.go.dev/sigs.k8s.io/controller-runtime/tools/setup-envtest/env?tab=versions
 ENVTEST_VERSION = v0.0.0-20260120065648-aebc15d7c689
 
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
-ENVTEST_K8S_VERSION = 1.33
+ENVTEST_K8S_VERSION = 1.34
 
 # GoImports versions at https://pkg.go.dev/golang.org/x/tools/cmd/goimports?tab=versions
-GOIMPORTS_VERSION ?= v0.41.0
+GOIMPORTS_VERSION ?= v0.44.0
 
 # Sort-imports versions at https://github.com/slintes/sort-imports/releases
 SORT_IMPORTS_VERSION = v0.3.0
 
 # update for major version updates to YQ_VERSION! see https://github.com/mikefarah/yq
 YQ_API_VERSION = v4
-YQ_VERSION = v4.50.1
+YQ_VERSION = v4.53.2
 
 BLUE_ICON_PATH = "./config/assets/medik8s_blue_icon.png"
 
@@ -140,7 +140,7 @@ generate: controller-gen ## Generate code
 
 .PHONY: fmt
 fmt: goimports ## Run go goimports against code - goimports = go fmt + fixing imports.
-	$(GOIMPORTS) -w  ./main.go ./api ./controllers ./e2e
+	$(GOIMPORTS) -w  ./cmd ./api ./internal ./e2e
 
 .PHONY: vet
 vet: ## Run go vet against code
@@ -179,7 +179,7 @@ test: test-no-verify-changes verify-no-changes ## Run tests and verify no change
 .PHONY: test-no-verify-changes
 test-no-verify-changes: go-verify manifests generate fmt vet test-imports envtest ## Generate and format code, run tests, generate manifests and bundle
 	KUBEBUILDER_ASSETS="$(shell $(ENVTEST) use $(ENVTEST_K8S_VERSION) -p path --bin-dir $(PROJECT_DIR)/testbin)" \
-	go test ./controllers/... -coverprofile cover.out ${TEST_OPS}
+	go test ./internal/controller/... -coverprofile cover.out ${TEST_OPS}
 
 .PHONY: test-e2e
 test-e2e: ## Run end to end tests

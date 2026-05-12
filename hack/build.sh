@@ -29,4 +29,4 @@ echo "cgo: ${CGO_ENABLED}"
 # export in case it was set
 export GOEXPERIMENT="${GOEXPERIMENT}"
 
-GOOS=linux GOARCH=amd64 go build -o "${DEST_DIR}"/manager main.go
+GOOS=linux GOARCH=amd64 go build -o "${DEST_DIR}"/manager cmd/main.go

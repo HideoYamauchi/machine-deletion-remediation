@@ -25,10 +25,10 @@ ENV PATH="${PATH}:/usr/local/go/bin"
 RUN go version
 
 # Copy the go source
-COPY main.go main.go
+COPY cmd/ cmd/
 COPY .git/ .git/
 COPY api/ api/
-COPY controllers/ controllers/
+COPY internal/ internal/
 COPY hack/ hack/
 COPY vendor/ vendor/
 COPY version/ version/
